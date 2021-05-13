@@ -7,8 +7,14 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	<http:listener-config name="HTTPListener_config" doc:name="HTTP Listener config" doc:id="d6739047-8ab8-4a5b-8b16-19e5709e4bdb" >
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
-	<flow name="sampleFlow" doc:id="10f67ac3-4782-4a34-a0b5-109e523ef9f6" >
+	<flow name="sampleflow" doc:id="10f67ac3-4782-4a34-a0b5-109e523ef9f6" >
 		<http:listener doc:name="Listener" doc:id="a996b3a8-9f18-4af2-a5e1-07f4bc749b22" config-ref="HTTPListener_config" path="/sample"/>
 		<logger level="INFO" doc:name="Logger" doc:id="be3e4035-d743-4d97-b5e3-1852ae454d59" message='#["hello world apisuccess"]'/>
+		<logger level="INFO" doc:name="Logger" doc:id="2964302f-a634-4a43-99e7-1df83ace6b96" message='#["flow ends"]'/>
+		<flow-ref doc:name="Flow Reference" doc:id="f2b89d18-bf42-4b18-a268-8d6e613d5edc" name="sampleapisubflow"/>
+		<logger level="INFO" doc:name="Logger" doc:id="435a8f69-9db8-4765-bebd-1ff7d5f1dbf6" message='#["from subflow to flow"]'/>
 	</flow>
+	<sub-flow name="sampleapisubflow" doc:id="62d137a9-2099-43b2-9e9d-ec7b61939b29" >
+		<logger level="INFO" doc:name="Logger" doc:id="a1c46a7a-ae81-4684-96a7-67e54eb2f463" message='#["subflow"]'/>
+	</sub-flow>
 </mule>
